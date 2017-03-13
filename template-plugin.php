@@ -67,6 +67,8 @@ class TemplatePlugin {
 
 		/* Add link to settings in plugins admin page */
 		add_filter( 'plugin_action_links_' . TEMPLATE_BASE_NAME , array( $this, 'plugin_links' ) );
+
+		new TemplateSettings();
 	}
 
 	/**
@@ -104,8 +106,8 @@ class TemplatePlugin {
 	 * @return [Array]        : Array of links on plugin page.
 	 */
 	public function plugin_links( $links ) {
-		$tools_link = '<a href="#">Tools</a>';
-		array_unshift( $links, $tools_link );
+		$settings_link = '<a href="options-general.php?page=template-plugin">Settings</a>';
+		array_unshift( $links, $settings_link );
 		return $links;
 	}
 }
