@@ -29,7 +29,7 @@ new TemplatePlugin();
 /**
  * TemplatePlugin class.
  *
- * @package IDX-Exporter
+ * @package template-plugin
  **/
 class TemplatePlugin {
 
@@ -49,13 +49,13 @@ class TemplatePlugin {
 	}
 
 	/**
-	 * Initialize idx-exporter.
+	 * Initialize Plugin.
 	 */
 	private function init() {
 		/* Language Support */
-		load_plugin_textdomain( 'idx-exporter', false, dirname( TEMPLATE_BASE_NAME ) . '/languages' );
+		load_plugin_textdomain( 'template-plugin', false, dirname( TEMPLATE_BASE_NAME ) . '/languages' );
 
-		/* IDX Broker Plugin Activation/De-Activation. */
+		/* Plugin Activation/De-Activation. */
 		register_activation_hook( TEMPLATE_PLUGIN_FILE, array( $this, 'activate' ) );
 		register_deactivation_hook( TEMPLATE_PLUGIN_FILE, array( $this, 'deactivate' ) );
 
