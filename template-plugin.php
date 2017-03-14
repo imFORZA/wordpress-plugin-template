@@ -34,11 +34,26 @@ new TemplatePlugin();
 class TemplatePlugin {
 
 	/**
-	 * [static description]
-	 * @var [type]
+	 * Plugin Basename.
+	 *
+	 * ie: template-plugin/template-plugin.php
+	 *
+	 * @var [String]
 	 */
 	public static $PLUGIN_BASE_NAME;
+
+	/**
+	 * Path to current plugin directory.
+	 *
+	 * @var [String]
+	 */
 	public static $PLUGIN_BASE_DIR;
+
+	/**
+	 * Path to plugin base file.
+	 *
+	 * @var [String]
+	 */
 	public static $PLUGIN_FILE;
 
 	/**
@@ -48,7 +63,7 @@ class TemplatePlugin {
 		/* Define Constants */
 		static::$PLUGIN_BASE_NAME = plugin_basename( __FILE__ ) ;
 		static::$PLUGIN_BASE_DIR = plugin_dir_path( __FILE__ );
-		static::$PLUGIN_FILE = static::$PLUGIN_BASE_DIR . 'template-plugin.php';
+		static::$PLUGIN_FILE = __FILE__;
 
 		/* Include dependencies */
 		include_once( 'includes.php' );
