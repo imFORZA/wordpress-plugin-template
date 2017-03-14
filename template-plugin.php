@@ -34,13 +34,21 @@ new TemplatePlugin();
 class TemplatePlugin {
 
 	/**
+	 * [static description]
+	 * @var [type]
+	 */
+	public static $PLUGIN_BASE_NAME;
+	public static $PLUGIN_BASE_DIR;
+	public static $PLUGIN_FILE;
+
+	/**
 	 * Plugin Constructor.
 	 */
 	public function __construct() {
 		/* Define Constants */
-		define( 'TEMPLATE_BASE_NAME', plugin_basename( __FILE__ ) );
-		define( 'TEMPLATE_BASE_DIR', plugin_dir_path( __FILE__ ) );
-		define( 'TEMPLATE_PLUGIN_FILE', TEMPLATE_BASE_DIR . 'template-plugin.php' );
+		static::$PLUGIN_BASE_NAME = plugin_basename( __FILE__ ) ;
+		static::$PLUGIN_BASE_DIR = plugin_dir_path( __FILE__ );
+		static::$PLUGIN_FILE = static::$PLUGIN_BASE_DIR . 'template-plugin.php';
 
 		/* Include dependencies */
 		include_once( 'includes.php' );
@@ -53,11 +61,11 @@ class TemplatePlugin {
 	 */
 	private function init() {
 		/* Language Support */
-		load_plugin_textdomain( 'template-plugin', false, dirname( TEMPLATE_BASE_NAME ) . '/languages' );
+		load_plugin_textdomain( 'template-plugin', false, dirname( static::$PLUGIN_BASE_NAME ) . '/languages' );
 
 		/* Plugin Activation/De-Activation. */
-		register_activation_hook( TEMPLATE_PLUGIN_FILE, array( $this, 'activate' ) );
-		register_deactivation_hook( TEMPLATE_PLUGIN_FILE, array( $this, 'deactivate' ) );
+		register_activation_hook( static::$PLUGIN_FILE, array( $this, 'activate' ) );
+		register_deactivation_hook( static::$PLUGIN_FILE, array( $this, 'deactivate' ) );
 
 		/* Set menu page */
 		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
@@ -66,7 +74,7 @@ class TemplatePlugin {
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
 
 		/* Add link to settings in plugins admin page */
-		add_filter( 'plugin_action_links_' . TEMPLATE_BASE_NAME , array( $this, 'plugin_links' ) );
+		add_filter( 'plugin_action_links_' . static::$PLUGIN_BASE_NAME , array( $this, 'plugin_links' ) );
 
 		new TemplateSettings();
 	}
@@ -81,7 +89,7 @@ class TemplatePlugin {
 	 * Enqueue CSS.
 	 */
 	public function admin_scripts() {
-		wp_register_style( 'template-plugin-css', plugins_url( 'assets/css/template-plugin-min.css', TEMPLATE_PLUGIN_FILE ) );
+		wp_register_style( 'template-plugin-css', plugins_url( 'assets/css/template-plugin-min.css', static::$PLUGIN_FILE ) );
 		wp_enqueue_style( 'template-plugin-css' );
 	}
 
