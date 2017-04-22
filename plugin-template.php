@@ -2,7 +2,7 @@
 /**
  * Template code for a WordPress plugin.
  *
- * @package template-plugin
+ * @package plugin-template
  */
 
 /*
@@ -13,7 +13,7 @@
 	Version: 1.0.0
 	Author: imFORZA
 	Contributors: bhubbard, sfgarza
-	Text Domain: template-plugin
+	Text Domain: plugin-template
 	Author URI: https://www.imforza.com
 	License: GPLv3 or later
 	License URI: https://www.gnu.org/licenses/gpl-3.0.en.html
@@ -29,14 +29,14 @@ new TemplatePlugin();
 /**
  * TemplatePlugin class.
  *
- * @package template-plugin
+ * @package plugin-template
  **/
 class TemplatePlugin {
 
 	/**
 	 * Plugin Basename.
 	 *
-	 * ie: template-plugin/template-plugin.php
+	 * ie: wordpress-plugin-template/plugin-template.php
 	 *
 	 * @var [String]
 	 */
@@ -76,7 +76,7 @@ class TemplatePlugin {
 	 */
 	private function init() {
 		/* Language Support */
-		load_plugin_textdomain( 'template-plugin', false, dirname( static::$PLUGIN_BASE_NAME ) . '/languages' );
+		load_plugin_textdomain( 'plugin-template', false, dirname( static::$PLUGIN_BASE_NAME ) . '/languages' );
 
 		/* Plugin Activation/De-Activation. */
 		register_activation_hook( static::$PLUGIN_FILE, array( $this, 'activate' ) );
@@ -104,8 +104,8 @@ class TemplatePlugin {
 	 * Enqueue CSS.
 	 */
 	public function admin_scripts() {
-		wp_register_style( 'template-plugin-css', plugins_url( 'assets/css/template-plugin-min.css', static::$PLUGIN_FILE ) );
-		wp_enqueue_style( 'template-plugin-css' );
+		wp_register_style( 'plugin-template-css', plugins_url( 'assets/css/plugin-template.css', static::$PLUGIN_FILE ) );
+		wp_enqueue_style( 'plugin-template-css' );
 	}
 
 	/**
@@ -129,7 +129,7 @@ class TemplatePlugin {
 	 * @return [Array]        : Array of links on plugin page.
 	 */
 	public function plugin_links( $links ) {
-		$settings_link = '<a href="options-general.php?page=template-plugin">Settings</a>';
+		$settings_link = '<a href="options-general.php?page=plugin-template">Settings</a>';
 		array_unshift( $links, $settings_link );
 		return $links;
 	}

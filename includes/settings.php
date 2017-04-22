@@ -2,7 +2,7 @@
 /**
  * Settings
  *
- * @package template-plugin
+ * @package plugin-template
  */
 
 /**
@@ -24,11 +24,11 @@ class TemplateSettings {
 	 */
 	public function admin_menu() {
 		register_setting( 'template_settings', 'template_settings' );
-		add_options_page( 'Template Settings', 'Template Settings', 'manage_options', 'template-plugin', array( $this, 'settings_page') );
+		add_options_page( 'Template Settings', 'Template Settings', 'manage_options', 'plugin-template', array( $this, 'settings_page') );
 	}
 
 	public function settings_page(){?>
-		<div class="wrap template-plugin">
+		<div class="wrap plugin-template">
 			<form method="post" action="options.php" >
 				<h1>Template Plugin</h1>
 				<hr>
