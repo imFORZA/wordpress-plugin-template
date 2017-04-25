@@ -30,40 +30,41 @@ new TemplatePlugin();
  * TemplatePlugin class.
  *
  * @package %%TEXTDOMAIN%%
+ * @todo Change class name to be unique to your plugin.
  **/
 class TemplatePlugin {
 
 	/**
 	 * Plugin Basename.
 	 *
-	 * ie: wordpress-plugin-template/plugin-template.php
+	 * IE: wordpress-plugin-template/plugin-template.php
 	 *
 	 * @var [String]
 	 */
-	public static $PLUGIN_BASE_NAME;
+	public static $plugin_base_name;
 
 	/**
 	 * Path to current plugin directory.
 	 *
 	 * @var [String]
 	 */
-	public static $PLUGIN_BASE_DIR;
+	public static $plugin_base_dir;
 
 	/**
 	 * Path to plugin base file.
 	 *
 	 * @var [String]
 	 */
-	public static $PLUGIN_FILE;
+	public static $plugin_file;
 
 	/**
 	 * Plugin Constructor.
 	 */
 	public function __construct() {
 		/* Define Constants */
-		static::$PLUGIN_BASE_NAME = plugin_basename( __FILE__ ) ;
-		static::$PLUGIN_BASE_DIR = plugin_dir_path( __FILE__ );
-		static::$PLUGIN_FILE = __FILE__;
+		static::$plugin_base_name = plugin_basename( __FILE__ );
+		static::$plugin_base_dir = plugin_dir_path( __FILE__ );
+		static::$plugin_file = __FILE__;
 
 		/* Include dependencies */
 		include_once( 'includes.php' );
@@ -76,41 +77,38 @@ class TemplatePlugin {
 	 */
 	private function init() {
 		/* Language Support */
-		load_plugin_textdomain( '%%TEXTDOMAIN%%', false, dirname( static::$PLUGIN_BASE_NAME ) . '/languages' );
+		load_plugin_textdomain( '%%TEXTDOMAIN%%', false, dirname( static::$plugin_base_name ) . '/languages' );
 
 		/* Plugin Activation/De-Activation. */
-		register_activation_hook( static::$PLUGIN_FILE, array( $this, 'activate' ) );
-		register_deactivation_hook( static::$PLUGIN_FILE, array( $this, 'deactivate' ) );
-
-		/* Set menu page */
-		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
+		register_activation_hook( static::$plugin_file, array( $this, 'activate' ) );
+		register_deactivation_hook( static::$plugin_file, array( $this, 'deactivate' ) );
 
 		/** Enqueue css and js files */
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'frontend_scripts' ) );
 
 		/* Add link to settings in plugins admin page */
-		add_filter( 'plugin_action_links_' . static::$PLUGIN_BASE_NAME , array( $this, 'plugin_links' ) );
+		add_filter( 'plugin_action_links_' . static::$plugin_base_name , array( $this, 'plugin_links' ) );
 
-		new TemplateSettings();
+		/* TODO: Change class name to be unique to your plugin */
+		new MyPluginSettings();
 	}
 
 	/**
-	 * Method that runs on admin_menu hook.
-	 */
-	public function admin_menu() {
-	}
-
-	/**
-	 * Enqueue CSS.
+	 * Enqueue Scripts and styles for Backend.
 	 */
 	public function admin_scripts() {
-		wp_register_style( 'plugin-template-css', plugins_url( 'assets/css/plugin-template.css', static::$PLUGIN_FILE ) );
-		wp_enqueue_style( 'plugin-template-css' );
+		// Any JS or CSS needed to display on admin pages should be enqueued here.
 	}
 
+	/**
+	 * Enqueue Scripts and styles for Frontend.
+	 */
 	public function frontend_scripts() {
+		wp_register_style( '%%TEXTDOMAIN%%-css', plugins_url( 'assets/css/main.css', static::$plugin_file ) );
+		wp_enqueue_style( '%%TEXTDOMAIN%%-css' );
 
+		wp_enqueue_script( '%%TEXTDOMAIN%%-js',plugins_url( 'assets/js/plugin.min.js', static::$plugin_file ), array( 'jquery' ), null, true );
 	}
 
 	/**
@@ -134,7 +132,7 @@ class TemplatePlugin {
 	 * @return [Array]        : Array of links on plugin page.
 	 */
 	public function plugin_links( $links ) {
-		$settings_link = '<a href="options-general.php?page=plugin-template">Settings</a>';
+		$settings_link = '<a href="options-general.php?page=%%TEXTDOMAIN%%">Settings</a>';
 		array_unshift( $links, $settings_link );
 		return $links;
 	}
