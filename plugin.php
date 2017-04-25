@@ -2,19 +2,19 @@
 /**
  * Template code for a WordPress plugin.
  *
- * @package plugin-template
+ * @package %%TEXTDOMAIN%%
  */
 
 /*
 -------------------------------------------------------------------------------
-	Plugin Name: Your Plugin Name
-	Plugin URI: https://www.imforza.com
-	Description: Describe the plugin.
+	Plugin Name: %%PLUGIN_NAME%%
+	Plugin URI: %%PLUGIN_URI%%
+	Description: %%PLUGIN_DESCRIPTION%%
 	Version: 1.0.0
-	Author: imFORZA
-	Contributors: bhubbard, sfgarza
-	Text Domain: plugin-template
-	Author URI: https://www.imforza.com
+	Author: %%AUTHOR%%
+	Contributors: %%CONTRIBUTORS%%
+	Text Domain: %%TEXTDOMAIN%%
+	Author URI: %%AUTHOR_URI%%
 	License: GPLv3 or later
 	License URI: https://www.gnu.org/licenses/gpl-3.0.en.html
 ------------------------------------------------------------------------------
@@ -29,7 +29,7 @@ new TemplatePlugin();
 /**
  * TemplatePlugin class.
  *
- * @package plugin-template
+ * @package %%TEXTDOMAIN%%
  **/
 class TemplatePlugin {
 
@@ -76,7 +76,7 @@ class TemplatePlugin {
 	 */
 	private function init() {
 		/* Language Support */
-		load_plugin_textdomain( 'plugin-template', false, dirname( static::$PLUGIN_BASE_NAME ) . '/languages' );
+		load_plugin_textdomain( '%%TEXTDOMAIN%%', false, dirname( static::$PLUGIN_BASE_NAME ) . '/languages' );
 
 		/* Plugin Activation/De-Activation. */
 		register_activation_hook( static::$PLUGIN_FILE, array( $this, 'activate' ) );
@@ -87,6 +87,7 @@ class TemplatePlugin {
 
 		/** Enqueue css and js files */
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'frontend_scripts' ) );
 
 		/* Add link to settings in plugins admin page */
 		add_filter( 'plugin_action_links_' . static::$PLUGIN_BASE_NAME , array( $this, 'plugin_links' ) );
@@ -106,6 +107,10 @@ class TemplatePlugin {
 	public function admin_scripts() {
 		wp_register_style( 'plugin-template-css', plugins_url( 'assets/css/plugin-template.css', static::$PLUGIN_FILE ) );
 		wp_enqueue_style( 'plugin-template-css' );
+	}
+
+	public function frontend_scripts() {
+
 	}
 
 	/**

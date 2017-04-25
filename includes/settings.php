@@ -2,7 +2,7 @@
 /**
  * Settings
  *
- * @package plugin-template
+ * @package %%TEXTDOMAIN%%
  */
 
 /**

@@ -1,8 +1,8 @@
 <?php
 /**
- * Inlcude Plugin Dependencies.
+ * Include Plugin Dependencies.
  *
- * @package TemplatePlugin
+ * @package %%TEXTDOMAIN%%
  */
 
 /* Exit if accessed directly. */
