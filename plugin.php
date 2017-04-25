@@ -7,16 +7,16 @@
 
 /*
 -------------------------------------------------------------------------------
-	Plugin Name: %%PLUGIN_NAME%%
-	Plugin URI: %%PLUGIN_URI%%
-	Description: %%PLUGIN_DESCRIPTION%%
-	Version: 1.0.0
-	Author: %%AUTHOR%%
-	Contributors: %%CONTRIBUTORS%%
+	Plugin Name: %%NAME%%
+	Plugin URI: %%URI%%
+	Description: %%DESCRIPTION%%
 	Text Domain: %%TEXTDOMAIN%%
+	Author: %%AUTHOR%%
 	Author URI: %%AUTHOR_URI%%
+	Contributors: %%CONTRIBUTORS%%
 	License: GPLv3 or later
 	License URI: https://www.gnu.org/licenses/gpl-3.0.en.html
+	Version: 1.0.0
 ------------------------------------------------------------------------------
 */
 

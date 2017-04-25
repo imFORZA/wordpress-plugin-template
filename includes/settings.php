@@ -34,7 +34,7 @@ class MyPluginSettings {
 	 */
 	public function admin_menu() {
 		register_setting( '%%TEXTDOMAIN%%_settings', '%%TEXTDOMAIN%%_settings' );
-		add_options_page( '%%PLUGIN_NAME%% Settings', '%%PLUGIN_NAME%% Settings', 'manage_options', '%%TEXTDOMAIN%%', array( $this, 'settings_page' ) );
+		add_options_page( '%%NAME%% Settings', '%%NAME%% Settings', 'manage_options', '%%TEXTDOMAIN%%', array( $this, 'settings_page' ) );
 	}
 
 	/**
