@@ -81,7 +81,7 @@ class TemplatePlugin {
 		static $instance;
 
 		if ( ! isset( $instance ) ) {
-			$instance = new Domains_Scheduler();
+			$instance = new TemplatePlugin();
 		}
 
 		return $instance;
