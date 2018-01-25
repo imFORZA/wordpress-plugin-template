@@ -23,8 +23,11 @@
 /* Exit if accessed directly. */
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
+/* Include dependencies */
+include_once( 'includes.php' );
+
 /** Instantiate the plugin. */
-new TemplatePlugin();
+$template_plugin = TemplatePlugin::get_instance();
 
 /**
  * TemplatePlugin class.
@@ -60,16 +63,28 @@ class TemplatePlugin {
 	/**
 	 * Plugin Constructor.
 	 */
-	public function __construct() {
+	private function __construct() {
 		/* Define Constants */
 		static::$plugin_base_name = plugin_basename( __FILE__ );
 		static::$plugin_base_dir = plugin_dir_path( __FILE__ );
 		static::$plugin_file = __FILE__;
 
-		/* Include dependencies */
-		include_once( 'includes.php' );
-
 		$this->init();
+	}
+
+	/**
+	 * Singleton instantiator.
+	 *
+	 * @return TemplatePlugin Single instance of plugin class.
+	 */
+	public static function get_instance() {
+		static $instance;
+
+		if ( ! isset( $instance ) ) {
+			$instance = new Domains_Scheduler();
+		}
+
+		return $instance;
 	}
 
 	/**
@@ -115,14 +130,14 @@ class TemplatePlugin {
 	 * Method that executes on plugin activation.
 	 */
 	public function activate() {
-		flush_rewrite_rules();
+		add_action( 'plugins_loaded', 'flush_rewrite_rules' );
 	}
 
 	/**
 	 * Method that executes on plugin de-activation.
 	 */
 	public function deactivate() {
-		flush_rewrite_rules();
+		add_action( 'plugins_loaded', 'flush_rewrite_rules' );
 	}
 
 	/**
